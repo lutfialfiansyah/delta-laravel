@@ -1,0 +1,48 @@
+.error { float: none; color: red; padding-left: 0px; vertical-align: bottom; }
+.form-control.error{
+    border: red solid 1px;
+}
+.form-control.valid{
+    border: #13c141 solid 1px;
+}
+.green{
+    background-color: #fc4a1a !important;
+    font-size: 12px !important;
+}
+.dataTables_wrapper .dataTables_length{
+    float: right !important;
+}
+.portlet-body{
+    padding-top:0px !important;
+}
+.ui-autocomplete {
+    z-index: 99999 !important;
+}
+.portlet-title{
+    padding-bottom: 10px !important;
+    color:#000 !important;
+}
+.tools{
+    background-color: transparent !important;
+    color:#000 !important;
+    border: solid 1px #ccc !important;
+    padding: 5px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+.table-bordered, .table-bordered>tbody>tr>td{
+    background-color: #fff !important;
+}
+.table>tfoot>tr>td, .table>tfoot>tr>th{
+    color:#fff !important;
+    background-color: #0c91e5 !important;
+}
+.noHover{
+    pointer-events: none;
+    color: inherit;
+}
+
+.noHover{
+    pointer-events: none;
+    color: inherit;
+}

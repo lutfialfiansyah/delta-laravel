@@ -1,0 +1,110 @@
+2017-10-10T02:23:55.278Z - error: Error during processing request: http://localhost:5488/api/report/ details: Unexpected token t SyntaxError: Unexpected token t
+    at parse (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\body-parser\lib\types\json.js:83:15)
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\body-parser\lib\read.js:116:18
+    at invokeCallback (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:262:16)
+    at done (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:251:7)
+    at IncomingMessage.onEnd (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:307:7)
+    at emitNone (events.js:105:13)
+    at IncomingMessage.emit (events.js:207:7)
+    at endReadableNT (_stream_readable.js:1059:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+2017-10-10T02:28:55.787Z - error: Error during processing request: http://localhost:5488/api/report/ details: Unexpected token t SyntaxError: Unexpected token t
+    at parse (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\body-parser\lib\types\json.js:83:15)
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\body-parser\lib\read.js:116:18
+    at invokeCallback (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:262:16)
+    at done (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:251:7)
+    at IncomingMessage.onEnd (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:307:7)
+    at emitNone (events.js:105:13)
+    at IncomingMessage.emit (events.js:207:7)
+    at endReadableNT (_stream_readable.js:1059:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+2017-10-10T02:30:23.654Z - error: Error during processing request: http://localhost:5488/api/report/ details: Unexpected token t SyntaxError: Unexpected token t
+    at parse (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\body-parser\lib\types\json.js:83:15)
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\body-parser\lib\read.js:116:18
+    at invokeCallback (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:262:16)
+    at done (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:251:7)
+    at IncomingMessage.onEnd (D:\xampp\htdocs\megatrend\node_modules\jsreport-express\node_modules\raw-body\index.js:307:7)
+    at emitNone (events.js:105:13)
+    at IncomingMessage.emit (events.js:207:7)
+    at endReadableNT (_stream_readable.js:1059:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+2017-10-10T07:43:03.472Z - error: exec error: Error: spawn fop.bat ENOENT requestId=3
+2017-10-10T08:06:27.936Z - error: Error when processing render request Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5) requestId=6
+2017-10-10T08:06:27.937Z - error: Error during processing request: http://localhost:5488/api/report/Population details: Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5)
+2017-10-10T08:06:54.426Z - error: Error when processing render request Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5) requestId=7
+2017-10-10T08:06:54.428Z - error: Error during processing request: http://localhost:5488/api/report/Population details: Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5)
+2017-10-10T08:14:06.006Z - error: Error when processing OData POST: /odata/templates Error: Duplicated entry for key Invoice
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\lib\persistence.js:208:17
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\node_modules\async\dist\async.js:3047:16
+    at replenish (D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\node_modules\async\dist\async.js:982:17)
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\node_modules\async\dist\async.js:986:9
+    at eachLimit$1 (D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\node_modules\async\dist\async.js:3133:22)
+    at Object.<anonymous> (D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\node_modules\async\dist\async.js:1016:16)
+    at Persistence.persistNewState (D:\xampp\htdocs\megatrend\node_modules\jsreport-fs-store\lib\persistence.js:175:9)
+    at Datastore._insert (D:\xampp\htdocs\megatrend\node_modules\nedb\lib\datastore.js:353:20)
+    at D:\xampp\htdocs\megatrend\node_modules\nedb\lib\executor.js:40:13
+    at Immediate.process (D:\xampp\htdocs\megatrend\node_modules\nedb\node_modules\async\lib\async.js:731:21)
+    at runCallback (timers.js:781:20)
+    at tryOnImmediate (timers.js:743:5)
+    at processImmediate [as _immediateCallback] (timers.js:714:5)
+2017-10-10T08:16:17.326Z - error: Error when processing render request Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5) requestId=8
+2017-10-10T08:16:17.364Z - error: Error during processing request: http://localhost:5488/api/report/Population details: Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5)
+2017-10-10T08:16:35.735Z - error: Error when processing render request Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5) requestId=9
+2017-10-10T08:16:35.738Z - error: Error during processing request: http://localhost:5488/api/report/Population details: Error during rendering report: Timeout error during executing script Error: Timeout error during executing script
+    at Timeout._onTimeout (D:\xampp\htdocs\megatrend\node_modules\script-manager\lib\manager-processes.js:24:8)
+    at ontimeout (timers.js:469:11)
+    at Timer.unrefdHandle (timers.js:580:5)
+2017-10-10T08:30:52.004Z - error: Error when processing render request Error during rendering report: items.forEach is not a function evalmachine.<anonymous>:13
+    items.forEach(function (i) {
+          ^
+
+TypeError: items.forEach is not a function
+    at Object.total (evalmachine.<anonymous>:13:11)
+    at eval (eval at createFunctionContext (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:254:23), <anonymous>:12:156)
+    at prog (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\runtime.js:219:12)
+    at execIteration (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\helpers\each.js:51:19)
+    at Object.<anonymous> (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\helpers\each.js:61:13)
+    at Object.eval [as main] (eval at createFunctionContext (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:254:23), <anonymous>:24:31)
+    at main (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\runtime.js:173:32)
+    at ret (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\runtime.js:176:12)
+    at ret (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\compiler\compiler.js:525:21)
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-handlebars\lib\handlebarsEngine.js:25:14 requestId=13
+2017-10-10T08:30:52.008Z - error: Error during processing request: http://localhost:5488/api/report/Invoice details: Error during rendering report: items.forEach is not a function evalmachine.<anonymous>:13
+    items.forEach(function (i) {
+          ^
+
+TypeError: items.forEach is not a function
+    at Object.total (evalmachine.<anonymous>:13:11)
+    at eval (eval at createFunctionContext (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:254:23), <anonymous>:12:156)
+    at prog (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\runtime.js:219:12)
+    at execIteration (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\helpers\each.js:51:19)
+    at Object.<anonymous> (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\helpers\each.js:61:13)
+    at Object.eval [as main] (eval at createFunctionContext (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\compiler\javascript-compiler.js:254:23), <anonymous>:24:31)
+    at main (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\runtime.js:173:32)
+    at ret (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\runtime.js:176:12)
+    at ret (D:\xampp\htdocs\megatrend\node_modules\handlebars\dist\cjs\handlebars\compiler\compiler.js:525:21)
+    at D:\xampp\htdocs\megatrend\node_modules\jsreport-handlebars\lib\handlebarsEngine.js:25:14
