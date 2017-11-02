@@ -617,8 +617,9 @@ public function addData(Request $request)
         $users = Auth::user()->id;
         $update = DB::table('product_coa')
         ->where('product_id','=',$id)
+        ->Where('module_index_id','=',1)
         ->update([
-            'module_index_id'=>$module_index_id,
+            //'module_index_id'=>$module_index_id,
             'coa_list_id'=>$stock,
             'updated_by'=>$users
 
@@ -628,8 +629,9 @@ public function addData(Request $request)
         $users = Auth::user()->id;
         $update = DB::table('product_coa')
         ->where('product_id','=',$id)
+        ->Where('module_index_id','=',2)
         ->update([
-            'module_index_id'=>$module_index_id,
+          //  'module_index_id'=>$module_index_id,
             'coa_list_id'=>$sales_transaction,
             'updated_by'=>$users
             ]);
@@ -638,8 +640,9 @@ public function addData(Request $request)
         $users = Auth::user()->id;
         $update = DB::table('product_coa')
         ->where('product_id','=',$id)
+        ->Where('module_index_id','=',3)
         ->update([
-            'module_index_id'=>$module_index_id,
+            //'module_index_id'=>$module_index_id,
             'coa_list_id'=>$sales_return,
             'updated_by'=>$users
         ]);
@@ -648,8 +651,9 @@ public function addData(Request $request)
         $users = Auth::user()->id;
         $update = DB::table('product_coa')
         ->where('product_id','=',$id)
+        ->Where('module_index_id','=',4)
         ->update([
-            'module_index_id'=>$module_index_id,
+            //'module_index_id'=>$module_index_id,
             'coa_list_id'=>$purchase_return,
             'updated_by'=>$users
         ]);
