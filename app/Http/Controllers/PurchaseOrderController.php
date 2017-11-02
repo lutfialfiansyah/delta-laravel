@@ -192,9 +192,14 @@ class PurchaseOrderController extends Controller
         $detail = DB::table('purchase_order_detail as a')
             ->join('product as b','b.id','=','a.product_id')
             ->leftjoin('unit as c','a.unit_id','=','c.id')
+            ->leftjoin('vwunitcon as d',function($q){
+              $q->on('a.product_id','=','d.product_id');
+              $q->on('a.unit_id','=','d.unit_id');
+            })
             ->where('purchase_order_id','=',$id)
             ->wherenull('a.deleted_at')
-            ->select('a.*','b.*','c.name as unitname','c.id as unitid')
+            ->select('a.id','a.price','a.discount','a.total','a.tax_id','a.tax_total','a.qty as unit_qty','b.*','c.name as unitname','c.id as unitid','d.qty as qtykali',
+            DB::raw('a.qty * d.qty as qty'))
             ->get();
         return Response()->json(
             [

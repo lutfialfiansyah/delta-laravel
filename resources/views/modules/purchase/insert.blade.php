@@ -314,6 +314,8 @@
                                     </div>
                                 </div>
                             <input type="hidden" required name="totalsum"  id="tsumtotal" value="" class="form-control">
+                            <input type="hidden" required name="totalsumtax"  id="tsumtotaltax" value="0" class="form-control">
+                            <input type="hidden" required name="tsumqty"  id="tsumqty" value="0" class="form-control">
                         </div>
 
                     </div>
@@ -1217,7 +1219,7 @@
                             //location.reload();
                             //exit;
                             swal({
-                                    title: "Sales",
+                                    title: "Purchase",
                                     text: data.msg,
                                     type: data.type,
                                     confirmButtonClass: 'btn btn-success'
@@ -1241,33 +1243,34 @@
                     var n =1;
                     for(var i in data)
                     {
-                       price = (data[i].unit_qty*data[i].conversion_qty)*data[i].price;
+                       price = (data[i].unit_qty*data[i].qtykali)*data[i].price;
                        price_total = price;
                        reguler_discount = 0;
-                       disc1 = (data[i].disc1/100)*price_total;
+                       disc1 = 0;
                        price_total -= disc1;
-                       disc2 = (data[i].disc2/100)*price_total;
+                       disc2 = 0;
                        reguler_discount = disc1+disc2;
                        price_total -= disc2;
-                       var price_disc = data[i].price_disc.split(',');
-                       var promo_disc1 = data[i].promo_disc1.split(',');
-                       var promo_disc2 = data[i].promo_disc2.split(',');
-                       promo_disc=0;
-                       $.each(price_disc,function(key,value){
-                         promo_disc += price_total*(promo_disc1[key]/100);
-                          price_total -= price_total*(promo_disc1[key]/100);
-                          promo_disc += price_total*(promo_disc2[key]/100);
-                          price_total -= price_total*(promo_disc2[key]/100);
-                       })
-                       total_discount = reguler_discount+promo_disc;
+                      //  var price_disc = data[i].price_disc.split(',');
+                      //  var promo_disc1 = data[i].promo_disc1.split(',');
+                      //  var promo_disc2 = data[i].promo_disc2.split(',');
+                      //  promo_disc=0;
+                      //  $.each(price_disc,function(key,value){
+                      //    promo_disc += price_total*(promo_disc1[key]/100);
+                      //     price_total -= price_total*(promo_disc1[key]/100);
+                      //     promo_disc += price_total*(promo_disc2[key]/100);
+                      //     price_total -= price_total*(promo_disc2[key]/100);
+                      //  })
+                       //total_discount = reguler_discount+promo_disc;
+                      total_discount=0;
                        valuetable = valuetable+"<tr>" +
                             "<td>"+ parseInt(n)+"</td>"+
                             "<td><span id='litemno_"+n+"'>"+ data[i].item_no+"</span></td>"+
                             "<td><span id='lproduct_code_"+n+"'>"+ data[i].code+"</span>"+
                             "<td><input type='hidden' id='product_"+count+"' name='productid[]' value='"+data[i].id+"'><span id='lproduct_"+count+"'>"+data[i].name+"</span></td>"+
-                            "<td><input type='hidden' id='qty_"+count+"' name='qty[]' value='"+data[i].qty+"'><span id='lqty_"+count+"'>"+data[i].unit_qty+"</span></td>"+
-                            "<td><input type='hidden' id='list_disc_"+count+"' name='list_disc[]' value='"+data[i].price_disc+",'><input type='hidden' id='unit_"+count+"' name='unit[]' value='"+data[i].unit_id+"'><span id='lunit_"+count+"'>"+data[i].unitname+"</span></td>"+
-                            "<td><span id='lconversion_"+count+"'>"+data[i].unit_qty*data[i].conversion_qty+"</span></td>"+
+                            "<td><input type='hidden' id='qty_"+count+"' class='qty' name='qty[]' value='"+data[i].qty+"'><span id='lqty_"+count+"'>"+data[i].unit_qty+"</span></td>"+
+                            "<td><input type='hidden' id='list_disc_"+count+"' name='list_disc[]' value='0'><input type='hidden' id='unit_"+count+"' name='unit[]' value='"+data[i].unit_id+"'><span id='lunit_"+count+"'>"+data[i].unitname+"</span></td>"+
+                            "<td><span id='lconversion_"+count+"'>"+data[i].qty+"</span></td>"+
                             "<td><input type='hidden' id='list_disc_reg_"+count+"' name='list_disc_reg[]' value='"+data[i].disc1+","+data[i].disc2+",'><input type='hidden' id='list_disc_pro2_"+count+"' name='list_disc_pro2[]' value='"+data[i].promo_disc2+",'><input type='hidden' id='list_disc_pro_"+count+"' name='list_disc_pro[]' value='"+data[i].promo_disc1+",'><input type='hidden' id='price_"+count+"' name='price[]' value='"+parseInt(data[i].price)+"'><span id='lprice_"+count+"'>"+accounting.formatMoney(price,'',2)+"</span></td>"+
                             "<td><input type='hidden' id='totdiscreg_"+count+"' name='totdisc_reg[]' value='"+reguler_discount+"'><input type='hidden' id='discount_"+count+"' name='discount[]' value='"+total_discount+"'><span id='ltotdiscount_"+count+"'>"+accounting.formatMoney(total_discount,'',2)+"</span></td>"+
                             "<td><input type='hidden'  id='rate_"+count+"' name='rate[]' value='10'><input type='hidden'  id='tax_"+count+"' name='taxid[]' value='"+data[i].tax_id+"'><input type='hidden' id='total_"+count+"' class='total' price='"+parseInt(price_total)+"' name='total[]' value='"+parseInt(price_total)+"'><span id='ltotal_"+count+"'>"+accounting.formatMoney(price_total,'',2)+"</span></td>"+
@@ -1338,9 +1341,24 @@
                 var sum = 0;
                 var pajak=0;
                 var selisihpajak=0;
+                var sumqty = 0;
+                var sumtax = 0;
+                var sumttax = 0;
                 $('.total').each(function () {
                     sum += parseFloat($(this).attr('price'));
                 });
+                $('.qty').each(function () {
+                    sumqty += parseFloat($(this).val());
+                });
+                $('.ttax').each(function () {
+                    sumtax += parseFloat($(this).attr('price'));
+                });
+                $('.totaltax').each(function () {
+                    sumttax += parseFloat($(this).attr('price'));
+                });
+                $("#tsumtotal").val(sum).trigger('change');
+                $("#tsumtotaltax").val(sumtax).trigger('change');
+                $("#tsumqty").val(sumqty).trigger('change');
                 if(document.getElementById('ctax').checked){
                   if(document.getElementById('includetax').checked){
                       pajak = sum /(1.1) ;

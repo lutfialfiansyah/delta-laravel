@@ -145,6 +145,7 @@ class PurchaseController extends Controller
         $discount = $request->input('otherdiscount');
         $tsumqty = $request->input('tsumqty');
         $add_cost = ($cost-$discount)/$tsumqty;
+
         $purchase = new Purchase();
         $purchase->purchase_transaction_no = $request->input('sales_transaction_no');
         $purchase->date = $request->input('date');
