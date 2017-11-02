@@ -11,6 +11,8 @@ use App\ProductSubCategory;
 use App\ProductType;
 use App\Unit;
 use App\UnitConversion;
+use App\ProductSpec;
+use App\ProductDetail;
 use App\CoaList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +36,7 @@ class ProductController extends Controller
             ->whereNull('a.deleted_at')
             ->orderBy('a.code','asc')
             ->get();
+
         //$products = Product::all();
         return Datatables::of($products)
             ->addColumn('price', function ($products) {
@@ -216,7 +219,7 @@ class ProductController extends Controller
             ->where('a.id','=',$id)
             ->select('a.*','b.name as type','c.name as group','d.name as brand','e.name as category','f.name as sub_category','g.name as unit')
             ->get()->first();
-        return view('modules.product.detail_product',compact('data'));
+        return view('modules.dashboard.product_dashboard',compact('data'));
     }
     public function restoreData($id){
         $salesman = Product::withTrashed()
@@ -235,11 +238,42 @@ class ProductController extends Controller
         $product = Product::find($id);
         $brands = ProductBrand::all();
         $categorys=ProductCategory::all();
+        $subcat = ProductSubCategory::all();
         $types = ProductType::all();
         $units = Unit::all();
         $groups = ProductGroup::all();
         $branch = DB::table('branch')->get();
-        return view('modules.product.edit_product',compact('branch','brands','categorys','units','types','groups','product'));
+        $spec = ProductSpec::all();
+        $unitcon = DB::table('vwunitcon as a')
+        ->select('product_id','b.name','c.name','qty','a.unit_id as id')
+        ->join('product as b','a.product_id','=','b.id')
+        ->join('unit as c','c.id','=','a.unit_id')
+        ->where('a.product_id',$product->id)
+        ->orderBy('product_id','c.id')
+        ->get();
+        //echo json_encode($unitcon);
+        //exit;
+        $productcoa = CoaList::all();
+        $procoa = DB::table('product_coa as a')
+        ->select('a.product_id as id','b.code','b.name','a.coa_list_id','a.module_index_id')
+        ->leftjoin('coa_list as b','a.coa_list_id','=','b.id')
+        ->leftjoin('module_index as c','a.module_index_id','=','c.id')
+        ->where('product_id',$product->id)
+        ->get();
+        // dd($procoa);
+        $spec = ProductSpec::all();
+        $productdetail = ProductDetail::all();
+        $prodetail = DB::table('product_detail as a')
+        ->select('d.name as tax','c.code','c.name as ven','a.vendor_id','a.tax_id','a.id')
+        ->leftjoin('product as b','b.id','=','a.product_id')
+        ->leftjoin('vendor as c','c.id','=','a.vendor_id')
+        ->leftjoin('tax as d','d.id','=','a.tax_id')
+        ->where('product_id',$product->id)
+        ->get();
+        // echo json_encode($prodetail);
+        // exit();
+
+        return view('modules.product.editv2_product',compact('prodetail','spec','procoa','unitcon','branch','brands','categorys','units','types','groups','product'));
     }
     public function getProduct(Request $request){
         $find = $request->input('product');
@@ -280,7 +314,7 @@ class ProductController extends Controller
             );
         }
     }
-    public function updateData(Request $request,$id){
+    public function updateDatas(Request $request,$id){
         if($request->isJson()){
              $sql = "call spupd_product('" . $request->json('code') . "','" . $request->json('name') . "','" . $request->json('unit') . "',
        '" . $request->json('type') . "','" . $request->json('category') . "','" . $request->json('subcategory') . "','" . $request->json('brand') . "',
@@ -351,21 +385,8 @@ class ProductController extends Controller
         ]);
     }
     public function getAllsData(Request $request){
+
         $data = DB::table('product as a')->select('a.*')
-            ->where('code','like','%'.$request->get('code').'%')
-            ->get();
-        return Response()->json([
-            'data'=>$data
-        ]);
-    }
-    public function getAllDataPO(Request $request){
-        $data = DB::table('product as a')
-            ->leftjoin('unit as b','a.unit_id','=','b.id')
-            ->leftjoin('vwunitcon as d',function($q){
-              $q->on('a.unit_id','=','d.unit_id')->on('a.id','d.product_id');
-            })
-            ->select('a.*','b.name as unitname','d.qty as qtykali')
-            ->where('code','like','%'.$request->get('code').'%')
             ->get();
         return Response()->json([
             'data'=>$data
@@ -539,6 +560,129 @@ public function addData(Request $request)
             return Response()->json(
                 ['status' => true, 'msg' => 'Product has updated','type'=>'success']
             );
+
+    }
+    public function updateData(Request $request,$id)
+    {
+        $item_no = $request['item_no'];
+        $code = $request['code'];
+        $name = $request['name'];
+        $type_id = $request['type_id'];
+        $brand_id = $request['brand_id'];
+        $category_id = $request['category_id'];
+        $sub_cat_id = $request['sub_cat_id'];
+        $group_id = $request['group_id'];
+        $unit_id = $request['unit_id'];
+        $users = Auth::user()->id;
+        $update = DB::table('product')
+        // ->join('addresses', 'users.id', '=', 'addresses.user_id')
+        ->where('id',$id)
+        ->update([
+            'item_no' => $item_no,
+            'code' => $code,
+            'name' => $name,
+            'unit_id' => $unit_id,
+            'type_id' => $type_id,
+            'brand_id' => $brand_id,
+            'category_id' => $category_id,
+            'sub_cat_id' => $sub_cat_id,
+            'group_id' => $group_id,
+            'updated_by' => $users
+        ]);
+        
+        $unit_2_id = $request['unit_2_id'];
+        $unit_2_qty = $request['unit_2_qty'];
+        $unit_3_id = $request['unit_3_id'];
+        $unit_3_qty = $request['unit_3_qty'];
+        $unit_4_id = $request['unit_4_id'];
+        $unit_4_qty = $request['unit_4_qty'];
+        $unit_5_id = $request['unit_5_id'];
+        $unit_5_qty = $request['unit_5_qty'];
+        $users = Auth::user()->id;
+        $update = DB::table('unit_conversion')
+        ->where('product_id','=',$id)
+        ->update([
+            'unit_2_id'=>$unit_2_id,
+            'unit_2_qty'=>$unit_2_qty,
+            'unit_3_id'=>$unit_3_id,
+            'unit_3_qty'=>$unit_3_qty,
+            'unit_4_id'=>$unit_4_id,
+            'unit_4_qty'=>$unit_4_qty,
+            'unit_5_id'=>$unit_5_id,
+            'unit_5_qty'=>$unit_5_qty,
+            'updated_by'=>$users
+        ]);
+        $stock = $request['stock'];
+        $module_index_id = '1';
+        $users = Auth::user()->id;
+        $update = DB::table('product_coa')
+        ->where('product_id','=',$id)
+        ->update([
+            'module_index_id'=>$module_index_id,
+            'coa_list_id'=>$stock,
+            'updated_by'=>$users
+
+        ]);
+        $sales_transaction = $request['sales_transaction_id'];
+        $module_index_id = '2';
+        $users = Auth::user()->id;
+        $update = DB::table('product_coa')
+        ->where('product_id','=',$id)
+        ->update([
+            'module_index_id'=>$module_index_id,
+            'coa_list_id'=>$sales_transaction,
+            'updated_by'=>$users
+            ]);
+        $sales_return = $request['sales_return_id'];
+        $module_index_id = '3';
+        $users = Auth::user()->id;
+        $update = DB::table('product_coa')
+        ->where('product_id','=',$id)
+        ->update([
+            'module_index_id'=>$module_index_id,
+            'coa_list_id'=>$sales_return,
+            'updated_by'=>$users
+        ]);
+        $purchase_return = $request['purchase_return_id'];
+        $module_index_id = '4';
+        $users = Auth::user()->id;
+        $update = DB::table('product_coa')
+        ->where('product_id','=',$id)
+        ->update([
+            'module_index_id'=>$module_index_id,
+            'coa_list_id'=>$purchase_return,
+            'updated_by'=>$users
+        ]);
+        $weight = $request['weight'];
+        $width = $request['width'];
+        $length = $request['length'];
+        $height = $request['height'];
+        $users = Auth::user()->id;
+        $update = DB::table('product_spec')
+            ->where('product_id','=',$id)
+            ->update([
+            'weight'=>$weight,
+            'width'=>$width,
+            'length'=>$length,
+            'height'=>$height,
+            'updated_by'=>$users
+        ]);
+
+        $vendor = $request['vendor_id'];
+        $tax = $request['tax_id'];
+        $users = Auth::user()->id;
+        $update = DB::table('product_detail')
+            ->where('product_id','=',$id)
+            ->update([
+            'vendor_id'=>$vendor,
+            'tax_id'=>$tax,
+            'updated_by'=>$users
+        ]);
+            return Response()->json(
+                ['status' => true, 'msg' => 'Product has updated','type'=>'success']
+            );
+            
+            
 
     }
     public function getUnitCon(Request $request){
