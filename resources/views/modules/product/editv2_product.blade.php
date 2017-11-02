@@ -4,7 +4,7 @@
     <div class="page-bar">
         <ul class="page-breadcrumb">
             <li>
-                <a href="">{!! Breadcrumbs::render('insert.product') !!}</a>
+                <a href="">{!! Breadcrumbs::render('edit.product') !!}</a>
             </li>
         </ul>
         <div class="page-toolbar">
@@ -18,7 +18,7 @@
         </div>
     </div>
     <!-- END PAGE BAR -->
-    <form action="" id="formproduct" method="post" class="horizontal-form">
+    <form action="#" id="formproduct" method="post" class="horizontal-form">
         <!-- BEGIN PAGE TITLE-->
         <h1 class="page-title">
             {{--<small>statistics, charts, recent events and reports</small>--}}
@@ -30,7 +30,7 @@
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <span style="font-size: 20px;">Add New Product</span>
+                                <span style="font-size: 20px;">Update Product</span>
                             </div>
                         </div>
 
@@ -60,7 +60,7 @@
                                                 <label class="control-label col-sm-4">Item No.</label>
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
-                                                        <input type="text" name="item_no" readonly value="{{$itemno}}" class="form-control">
+                                                        <input type="text" name="item_no" readonly value="{{$product->item_no}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,7 +70,7 @@
                                                 <label class="control-label  col-sm-4">Product Code</label>
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
-                                                        <input type="text" id=""   name="code" value="{{ $code }}" class="form-control" placeholder="-">
+                                                        <input type="text" id="" name="code" value="{{$product->code}}" class="form-control" placeholder="-">
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@
                                                 <label class="control-label  col-sm-4">Product Name</label>
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
-                                                        <input type="text" id=""  name="name" value="" class="form-control" placeholder="-">
+                                                        <input type="text" id="" name="name" value="{{$product->name}}" class="form-control" placeholder="-">
                                                     </div>
                                                 </div>
                                             </div>
@@ -91,8 +91,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
                                                     <span class="input-group-addon" style="cursor: pointer;" id="stype"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="ttype" placeholder="-" class="form-control">
-                                                <input type="hidden" name="type_id" id="type" placeholder="-" class="form-control">
+                                                <input type="text" id="ttype" value="{{$product->type->name}}" placeholder="-" class="form-control">
+                                                <input type="hidden" name="type_id" id="type" value="{{$product->type->id}}"   placeholder="-" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,8 +103,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
                                                     <span class="input-group-addon" style="cursor: pointer;" id="sbrand"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tbrand" placeholder="-" class="form-control">
-                                                <input type="hidden" name="brand_id" id="brand" placeholder="-" class="form-control">
+                                                <input type="text" id="tbrand" value="{{ $product->productBrand->code.'-'.$product->productBrand->name }}" placeholder="-" class="form-control">
+                                                <input type="hidden" value="{{ $product->productBrand->id }}" name="brand_id"  id="brand" placeholder="-" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,8 +120,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width:100%;">
                                                        <span class="input-group-addon" style="cursor: pointer;" id="scategory"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tcategory" placeholder="-" class="form-control category">
-                                                <input type="hidden" name="category_id" id="category" placeholder="-" class="form-control">
+                                                <input type="text" id="tcategory" value="{{ $product->productCategory->code.'-'.$product->productCategory->name }}" placeholder="-" class="form-control category">
+                                                <input type="hidden" value="{{ $product->productCategory->id }}" name="category_id" id="category" placeholder="-" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,8 +132,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
                                                         <span class="input-group-addon" style="cursor: pointer;" id="ssubcategory"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tsubcategory" placeholder="-" class="form-control subcategory">
-                                                <input type="hidden" name="sub_cat_id" id="subcategory" placeholder="-" class="form-control ">
+                                                <input type="text" id="tsubcategory" value="{{ $product->productSubCategory->code.'-'.$product->productSubCategory->name }}" placeholder="-" class="form-control subcategory">
+                                                <input type="hidden" value="{{ $product->productSubCategory->id }}" name="sub_cat_id"  id="subcategory" placeholder="-" class="form-control ">
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,8 +144,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
                                                        <span class="input-group-addon" style="cursor: pointer;" id="sprodgroup"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tprodgroup" placeholder="-" class="form-control">
-                                                <input type="hidden" name="group_id" id="prodgroup" placeholder="-" class="form-control">
+                                                <input type="text" id="tprodgroup" value="{{ $product->productGroup->code.'-'.$product->productGroup->name }}" placeholder="-" class="form-control">
+                                                <input type="hidden" value="{{ $product->productGroup->id }}" name="group_id" id="prodgroup" placeholder="-" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,8 +183,8 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                <span class="input-group-addon" style="cursor: pointer;" id="sunit"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tunit" placeholder="search" class="form-control">
-                                                <input type="hidden" name="unit_id" id="unit" placeholder="search" class="form-control">
+                                                <input type="text" id="tunit" value="{{ $product->unit->name }}" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{ $product->unit->id }}" name="unit_id" id="unit" placeholder="search" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -195,14 +195,14 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                  <span class="input-group-addon" style="cursor: pointer;" id="sunit2"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tunit2" placeholder="search" class="form-control">
-                                                <input type="hidden" name="unit_2_id" id="unit2" placeholder="search" class="form-control">
+                                                <input type="text" id="tunit2" value="{{{ isset($unitcon[1]->name)?$unitcon[1]->name:'' }}}" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($unitcon[1]->id)?$unitcon[1]->id:'' }}}" name="unit_2_id" id="unit2" placeholder="search" class="form-control">
                                             </div>
                                         </div>
                                         <label class="control-label bold">PCS</label>
                                         <div class="col-md-2">
                                             <div class="input-group">
-                                                <input type="text" id="unit2qty"  name="unit_2_qty" value="" class="form-control" placeholder="-">
+                                                <input type="text" id="unit2qty"  name="unit_2_qty" value="{{{ isset($unitcon[1]->qty)?$unitcon[1]->qty:'' }}}" class="form-control" placeholder="-">
                                             </div>
                                         </div>
                                     </div>
@@ -213,14 +213,14 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group">
                                                           <span class="input-group-addon" style="cursor: pointer;" id="sunit3"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tunit3" placeholder="search" class="form-control">
-                                                <input type="hidden" name="unit_3_id" id="unit3" placeholder="search" class="form-control">
+                                                <input type="text" id="tunit3" value="{{{isset($unitcon[2]->name)?$unitcon[2]->name:'' }}}" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($unitcon[2]->id)?$unitcon[2]->id:'' }}}" name="unit_3_id" id="unit3" placeholder="search" class="form-control">
                                                     </div>
                                                 </div>
                                                 <label class="control-label bold">PCS</label>
                                                 <div class="col-md-2">
                                                     <div class="input-group">
-                                                        <input type="text" id="unit3qty" name="unit_3_qty" value="" class="form-control" placeholder="-">
+                                                        <input type="text" id="unit3qty" name="unit_3_qty" value="{{{ isset($unitcon[2]->qty)?$unitcon[2]->qty:'' }}}" class="form-control" placeholder="-">
                                                     </div>
                                                 </div>
                                             </div>
@@ -231,14 +231,14 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group">
                                                           <span class="input-group-addon" style="cursor: pointer;" id="sunit4"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tunit4" placeholder="search" class="form-control">
-                                                <input type="hidden" name="unit_4_id" id="unit4" placeholder="search" class="form-control">
+                                                <input type="text" id="tunit4" value="{{{ isset($unitcon[3]->name)?$unitcon[3]->name:'' }}}" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($unitcon[3]->id)?$unitcon[3]->id:'' }}}" name="unit_4_id" id="unit4" placeholder="search" class="form-control">
                                                     </div>
                                                 </div>
                                                 <label class="control-label bold">PCS</label>
                                                 <div class="col-md-2">
                                                     <div class="input-group">
-                                                        <input type="text" id="unit4qty"  name="unit_4_qty" value="" class="form-control" placeholder="-">
+                                                        <input type="text" value="{{{ isset($unitcon[3]->qty)?$unitcon[3]->qty:'' }}}" id="unit4qty"  name="unit_4_qty" value="" class="form-control" placeholder="-">
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,14 +249,14 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group">
                                                           <span class="input-group-addon" style="cursor: pointer;" id="sunit5"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tunit5" placeholder="search" class="form-control">
-                                                <input type="hidden" name="unit_5_id" id="unit5" placeholder="search" class="form-control">
+                                                <input type="text" id="tunit5" value="{{{ isset($unitcon[4]->name)?$unitcon[4]->name:'' }}}" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($unitcon[4]->id)?$unitcon[4]->id:'' }}}" name="unit_5_id" id="unit5" placeholder="search" class="form-control">
                                                     </div>
                                                 </div>
                                                 <label class="control-label bold">PCS</label>
                                                 <div class="col-md-2">
                                                     <div class="input-group">
-                                                        <input type="text" id="unit5qty"  name="unit_5_qty" value="" class="form-control" placeholder="-">
+                                                        <input type="text" id="unit5qty"  name="unit_5_qty" value="{{ isset($unitcon[4]->qty)?$unitcon[4]->qty:'' }}" class="form-control" placeholder="-">
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,8 +292,8 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                <span class="input-group-addon" style="cursor: pointer;" id="sstock"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tstock" placeholder="search" class="form-control">
-                                                <input type="hidden" name="stock" id="stock" placeholder="search" class="form-control">
+                                                <input type="text" id="tstock" placeholder="search" value="{{{ isset($procoa[0]->code)?$procoa[0]->code.'-'.$procoa[0]->name:'' }}}" class="form-control">
+                                                <input type="hidden" value="{{{ isset($procoa[0]->coa_list_id)?$procoa[0]->coa_list_id:'' }}}" name="stock" id="stock" placeholder="search" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -304,8 +304,8 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                               <span class="input-group-addon" style="cursor: pointer;" id="ssales_trans"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tsales_trans" placeholder="search" class="form-control">
-                                                <input type="hidden" name="sales_transaction_id" id="sales_trans" placeholder="search" class="form-control">
+                                                <input type="text" value="{{{ isset($procoa[1]->code)?$procoa[1]->code.'-'.$procoa[1]->name:'' }}}" id="tsales_trans" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($procoa[1]->coa_list_id)?$procoa[1]->coa_list_id:'' }}}" name="sales_transaction_id" id="sales_trans" placeholder="search" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -316,8 +316,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group">
                                                         <span class="input-group-addon" style="cursor: pointer;" id="ssales_return"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tsales_return" placeholder="search" class="form-control">
-                                                <input type="hidden" name="sales_return_id" id="sales_return" placeholder="search" class="form-control">
+                                                <input type="text" value="{{{ isset($procoa[2]->code)?$procoa[2]->code.'-'.$procoa[2]->name:'' }}}" id="tsales_return" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($procoa[2]->coa_list_id)?$procoa[2]->coa_list_id:'' }}}" name="sales_return_id" id="sales_return" placeholder="search" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,10 +328,10 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group">
                                                          <span class="input-group-addon" style="cursor: pointer;" id="spurchase_return"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tpurchase_return" placeholder="search" class="form-control">
-                                                <input type="hidden" name="purchase_return_id" id="purchase_return" placeholder="search" class="form-control">
+                                                <input type="text" value="{{{ isset($procoa[3]->code)?$procoa[3]->code.'-'.$procoa[3]->name:'' }}}" id="tpurchase_return" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($procoa[3]->coa_list_id)?$procoa[3]->coa_list_id:'' }}}" name="purchase_return_id" id="purchase_return" placeholder="search" class="form-control">
                                                     </div>
-                                                </div>
+                                                </div>  
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top: 10px;margin-left: 10px;">
@@ -383,19 +383,19 @@
                                                             <label class="control-label col-sm-1" style="margin-right: 10px;">Width</label>
                                                             <div class="col-md-2">
                                                                 <div class="input-group">
-                                                                    <input type="text" name="width" value="" class="form-control" placeholder="-">
+                                                                    <input type="text" name="width" value="{{{ isset($product->spec->width)?$product->spec->width:'' }}}" class="form-control" placeholder="-">
                                                                 </div>
                                                             </div>
                                                             <label class="control-label  col-sm-1" style="margin-right: 10px;">Length</label>
                                                             <div class="col-md-2">
                                                                 <div class="input-group">
-                                                                    <input type="text" id=""  name="length" value="" class="form-control" placeholder="-">
+                                                                    <input type="text" id=""  name="length" value="{{{ isset($product->spec->length)?$product->spec->length:'' }}}" class="form-control" placeholder="-">
                                                                 </div>
                                                             </div>
                                                             <label class="control-label  col-sm-1" style="margin-right: 10px;">Height</label>
                                                             <div class="col-md-2">
                                                                 <div class="input-group">
-                                                                    <input type="text" id=""  name="height" value="" class="form-control" placeholder="-">
+                                                                    <input type="text" id=""  name="height" value="{{{ isset($product->spec->height)?$product->spec->height:'' }}}" class="form-control" placeholder="-">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -405,7 +405,7 @@
                                                         <label class="control-label col-sm-1" style="margin-right: 10px; ">Weight</label>
                                                         <div class="col-md-2">
                                                             <div class="input-group">
-                                                                <input type="text" name="weight" class="form-control" placeholder="-">
+                                                                <input type="text" name="weight" value="{{{ isset($product->spec->weight)?$product->spec->weight:'' }}}" class="form-control" placeholder="-">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -443,8 +443,8 @@
                                                 <div class="col-md-6">
                                                     <div class="input-group">
                                                          <span class="input-group-addon" style="cursor: pointer;" id="svendor"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="tvendor" placeholder="search" class="form-control">
-                                                <input type="hidden" name="vendor_id" id="vendor" placeholder="search" class="form-control">
+                                                <input type="text" id="tvendor" value="{{{ isset($prodetail[0]->code)?$prodetail[0]->code.'-'.$prodetail[0]->ven:'' }}}" placeholder="search" class="form-control">
+                                                <input type="hidden" value="{{{ isset($prodetail[0]->vendor_id)?$prodetail[0]->vendor_id:'' }}}" name="vendor_id" id="vendor" placeholder="search" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -455,8 +455,8 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon" style="cursor: pointer;" id="stax"><i class="fa fa-search"></i></span>
-                                                <input type="text" id="ttax" placeholder="search" class="form-control">
-                                                <input type="hidden" name="tax_id" id="tax" placeholder="search" class="form-control">
+                                                <input type="text" id="ttax" placeholder="search" value="{{{ isset($prodetail[0]->tax)?$prodetail[0]->tax:'' }}}" class="form-control">
+                                                <input type="hidden" value="{{{ isset($prodetail[0]->tax_id)?$prodetail[0]->tax_id:'' }}}" name="tax_id" id="tax" placeholder="search" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -474,8 +474,8 @@
 
         </div>
                     <div class="form-actions" style="margin-top: 10px; ">
-                            <button type="button" class="btn green btnsaveproduct center-block">
-                                <i class="fa fa-check"></i> Create</button>
+                            <button type="button" class="btn green btnupdateproduct center-block">
+                                <i class="fa fa-check"></i>Update</button>
                     </div>
     </form>
 
@@ -485,8 +485,8 @@
             $(function () {
             var form = $('#formproduct');
             // $('#formproduct').validate();
-            $(".btnsaveproduct").click(function () {
-                var urls='{{url('api/product/addData')}}';
+            $(".btnupdateproduct").click(function () {
+                var urls='{{route('product.updateData',['id'=>$product->id])}}';
                 if(form.valid()) {
                     $.ajax({
                         url: urls,
@@ -514,7 +514,7 @@
                 }
             });
             
-
+           
 
             $("#tunit3").attr('disabled', 'disabled');
             $("#unit3qty").attr('disabled', 'disabled');
