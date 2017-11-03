@@ -36,4 +36,7 @@ class Product extends Model
     public function type(){
         return $this->belongsTo(ProductType::class,'type_id','id');
     }
+    public function spec(){
+        return $this->hasOne('App\ProductSpec','product_id','id');
+    }
 }

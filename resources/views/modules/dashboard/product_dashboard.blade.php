@@ -73,7 +73,7 @@
                             <th>Sub Category</th>
                             <th>Brand</th>
                             <th>Group</th>
-                            <th>Stock Min</th>
+                            {{-- <th>Stock Min</th> --}}
                             <th>Summary Stock</th>
                             <th>Price</th>
                             <th>Action</th>
@@ -217,7 +217,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" style="width: 200px !important;" class="btn btn-circle green btnall center-block">Update</button>
+                    {{-- <button type="button" style="width: 200px !important;" class="btn btn-circle green btnall center-block">Update</button> --}}
+                    <a href="{{ url('/product/edit_product/') }}" style="width: 200px !important;" class="btn btn-circle green btnall center-block btnupdate">Update</a>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -308,7 +309,7 @@
                     {data: 'subcategory', name: 'subcategory'},
                     {data: 'brand', name: 'brand'},
                     {data: 'group', name: 'group'},
-                    {data: 'stock_minimum', name: 'stok_min'},
+                    // {data: 'stock_minimum', name: 'stok_min'},
                     {data: 'summarystock', name: 'summarystock'},
                     {data: 'price', name: 'price'},
                     {data: 'action', name: 'action'}
@@ -475,6 +476,7 @@
                                     "<td>"+value['total']+"</td>"+
                             "</tr>"
                     });
+                    $('.btnupdate').attr('href',"{{ url('product/edit_product/')}}/"+perrow.id)
                     console.log(table);
                     $("#dtlproduct tbody").append(table);
                 });

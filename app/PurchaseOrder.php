@@ -12,7 +12,7 @@ class PurchaseOrder extends Model
     public $timestamps =true;
 
     public function vendor(){
-      return  $this->belongsTo('App\Vendor','vendor_id','id');
+        $this->belongsTo('App\Vendor','id');
     }
     public function getUser(){
        return $this->belongsTo('App\User','updated_by','id');

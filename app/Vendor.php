@@ -15,4 +15,7 @@ class Vendor extends Model
     public function vendorGroup(){
         return $this->hasMany('App\VendorGroup','vendor_group_id','id');
     }
+    public function productDetail(){
+    	return $this->hasMany('App\productDetail','id');
+    }
 }

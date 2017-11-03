@@ -126,28 +126,6 @@
                             <!--/span-->
                         </div>
                         <!--/row-->
-                        <!--/row-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Max Payment Period:</label>
-                                    <div class="col-md-9">
-                                        <p class="form-control-static">  {{$data->max_payment_periode}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Stock Minimum</label>
-                                    <div class="col-md-9">
-                                        <p class="form-control-static"> {{$data->stock_minimum}} </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <!--/row-->
                     </div>
                     <div class="form-actions">
                         <div class="row">
