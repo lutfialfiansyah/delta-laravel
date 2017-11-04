@@ -625,7 +625,7 @@
             $("#productids").autocomplete({
                 source:function(request,response){
                     $.ajax( {
-                        url: "{{url('api/product/getAllData')}}",
+                        url: "{{url('api/product/getAllsData')}}",
                         dataType: "json",
                         data: {
                             code: request.term,

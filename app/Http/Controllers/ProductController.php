@@ -392,6 +392,18 @@ class ProductController extends Controller
             'data'=>$data
         ]);
     }
+    public function getAllDataPO(Request $request){
+
+        $data = DB::table('product as a')->select('a.*','c.name as unitname','d.qty as qtykali')
+            ->leftjoin('unit as c','a.unit_id','=','c.id')
+            ->leftjoin('vwunitcon as d',function($q){
+              $q->on('a.unit_id','=','d.unit_id')->on('a.id','d.product_id');
+            })
+            ->get();
+        return Response()->json([
+            'data'=>$data
+        ]);
+    }
     public function cekStock(Request $reg,$id){
        if($reg->get('qtys')!=null){
          try{
@@ -589,7 +601,7 @@ public function addData(Request $request)
             'group_id' => $group_id,
             'updated_by' => $users
         ]);
-        
+
         $unit_2_id = $request['unit_2_id'];
         $unit_2_qty = $request['unit_2_qty'];
         $unit_3_id = $request['unit_3_id'];
@@ -685,8 +697,8 @@ public function addData(Request $request)
             return Response()->json(
                 ['status' => true, 'msg' => 'Product has updated','type'=>'success']
             );
-            
-            
+
+
 
     }
     public function getUnitCon(Request $request){
