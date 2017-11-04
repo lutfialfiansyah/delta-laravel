@@ -28,7 +28,7 @@ class EmployeeController extends Controller
                                         </button>
                                         <ul class="dropdown-menu pull-right" role="menu">
                                             <li>
-                                                <a href="#" data-id="'.$ap->id.'" 
+                                                <a href="#" data-id="'.$ap->id.'"
                                                    data-code="'.$ap->code.'"
                                                    data-fname="'.$ap->first_name.'"
                                                    data-lname="'.$ap->last_name.'"
@@ -81,13 +81,13 @@ class EmployeeController extends Controller
         $emp->updated_by=$session['id'];
         if($emp->save()){
             $id=$emp->id;
-            DB::table('users')->insert([
-                'employee_id'=>$id,
-                'email'=>$request->input('email'),
-                'password'=>bcrypt($request->input('password')),
-                'created_at'=>Carbon::now(),
-                'updated_by'=>$request->input('user_id')
-            ]);
+            // DB::table('users')->insert([
+            //     'employee_id'=>$id,
+            //     'email'=>$request->input('email'),
+            //     'password'=>bcrypt($request->input('password')),
+            //     'created_at'=>Carbon::now(),
+            //     'updated_by'=>$request->input('user_id')
+            // ]);
             return Response()->json(
                 ['status' => true, 'msg' => 'Data has added!','type'=>'success','title'=>'Success']
             );
@@ -128,5 +128,12 @@ class EmployeeController extends Controller
                 ['status' => false, 'msg' => 'Something went wrong!', 'type' => 'warning', 'title' => 'Ops']
             );
         }
+    }
+    public function getAllData(Request $request){
+      $data = DB::table('employee')->
+              where('employee_no','like','%'.$request->get('code').'%')->get();
+      return Response()->json([
+          'data'=>$data
+      ]);
     }
 }

@@ -224,6 +224,9 @@ class DashboardController extends Controller
         return view('modules.dashboard.productCoa',compact('coalist','product'));
     }
     public function promotion(){
-        return view('modules.dashboard.promotion_dashboard');
+        return view('modules.dashboard.users');
+    }
+    public function users(){
+        return view('modules.dashboard.users_dashboard');
     }
 }

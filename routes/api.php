@@ -734,6 +734,10 @@ Route::get('/category/getAllData/',[
         'uses' => 'EmployeeController@getData',
         'as' => 'employee.getData'
     ]);
+    Route::get('employee/getAllData', [
+        'uses' => 'EmployeeController@getAllData',
+        'as' => 'employee.getAllData'
+    ]);
     Route::post('/employee/addData', [
         'uses' => 'EmployeeController@addData',
         'as' => 'employee.addData'
@@ -861,4 +865,13 @@ Route::post('promotion/update/{id}', [
 Route::get('promotion/cekPromotion', [
     'uses' => 'Promotion\PromotionController@cekPromotion',
     'as' => 'promotion.cekPromotion'
+]);
+
+Route::get('users/getData', [
+    'uses' => 'UsersController@getData',
+    'as' => 'users.getData'
+]);
+Route::post('users/addData', [
+    'uses' => 'UsersController@addData',
+    'as' => 'users.addData'
 ]);
