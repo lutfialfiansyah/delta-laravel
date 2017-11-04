@@ -71,14 +71,28 @@ class CustomerController extends Controller
         return view('modules.customer.detail_customer',compact('data'));
     }
     public function addData(Request $request){
-        $sql = "call spins_customer('".$request->input('code')."' ,'".$request->input('name')."','".$request->input('customer_group')."','".$request->input('area')."','".$request->input('salesman')."','".$request->input('payment_term')."')";
-        try {
-            $save =DB::statement($sql);
-        }catch (\Exception $e){
-            $save=0;
-        }
-        //$save=0;
-        if($save) {
+        $c = DB::table('customer')->insertGetId([
+          'code'=>$request->input('code'),
+          'name'=>$request->input('name'),
+          'customer_group_id'=>$request->input('customer_group'),
+          'area_city_id'=>$request->input('are'),
+          'salesman_id'=>$request->input('salesman'),
+          'payment_term_id'=>$request->input('payment_term'),
+          'branch_id'=>'1'
+        ]);
+        $cd = DB::table('customer_detail')->insert([
+          'customer_id'=>$c,
+          'address'=>$request->input('address'),
+          'email'=>$request->input('email'),
+          'work_phone1'=>$request->input('work_phone1'),
+          'work_phone2'=>$request->input('work_phone2'),
+          'work_fax'=>$request->input('work_fax'),
+          'total_employee'=>$request->input('total_employee'),
+          'owner_name'=>$request->input('owner_name'),
+          'owner_phone'=>$request->input('owner_phone'),
+          'owner_email'=>$request->input('owner_email')
+        ]);
+        if($cd) {
             return Response()->json(
                 ['status' => true, 'msg' => 'Customer has added!','type'=>'success','title'=>'Success']
             );

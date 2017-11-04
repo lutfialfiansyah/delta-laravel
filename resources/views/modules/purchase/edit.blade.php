@@ -92,10 +92,9 @@
                                     <div class="col-md-8">
                                         <div class="input-group">
                                             <span class="input-group-addon" style="    cursor: pointer;" id="scustomer"><i class="fa fa-search"></i></span>
-                                            <input type="text" id="customer" required name="" value="" class="form-control" placeholder="-">
-                                            <input type="hidden" id="customer_id" required name="customer_id" value="" class="form-control" placeholder="-">
+                                            <input type="text" id="customer" value="{{$purchase->vendor->code."-".$purchase->vendor->name}}" required name="" value="" class="form-control" placeholder="-">
+                                            <input type="hidden" id="customer_id" value="{{$purchase->vendor_id}}" required name="customer_id" value="" class="form-control" placeholder="-">
                                             <input type="hidden" id="customer_group_id" required name="customer_group_id" value="" class="form-control" placeholder="-">
-
                                         </div>
                                     </div>
                                 </div>

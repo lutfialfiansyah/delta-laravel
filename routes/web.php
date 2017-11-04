@@ -677,4 +677,10 @@ Route::get('creditNote', [
         'uses' => 'StockBeginningController@cekdata',
         'as' => 'cekstock'
     ]);
+
+    //Stock
+    Route::get('users', [
+        'uses' => 'DashboardController@users',
+        'as' => 'users'
+    ]);
 });

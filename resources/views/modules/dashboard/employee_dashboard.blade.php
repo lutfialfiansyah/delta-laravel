@@ -142,20 +142,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Confirm Password</label>
-                                    <input type="password" name="cpassword" class="form-control">
-                                </div>
-                            </div>
-                        </div>
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}" class="form-control">
                     </form>
                 </div>
