@@ -79,6 +79,7 @@ class ProductController extends Controller
         $search = $request->q;
         $data =DB::table('product as a')
             ->join('product_type as d','a.type_id','=','d.id')
+            ->where('')
             ->select('a.id','d.name as text')
             ->whereNull('a.deleted_at')
             ->orderBy('d.name','asc')

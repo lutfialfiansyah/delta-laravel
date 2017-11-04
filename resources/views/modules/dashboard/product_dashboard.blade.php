@@ -238,6 +238,9 @@
             ).draw();
         }
         $(function() {
+            $('#col8_filter').change(function(){
+                $(this).val();
+            })
             $('#filterId').hide();
             $('#triggerShow').click(function(){
                 $('#filterId').toggle();
@@ -259,6 +262,79 @@
                 "serverSide": true,
                 "ajax": "{{ route('product.getData') }}",
                 "fnDrawCallback": function () {
+
+                    this.api().columns([4]).every( function () {
+                    var column = this;
+                    var d = column.data().unique();
+                    var brand = "";
+                    brand = "<option></option>";
+                    $('#col4_filter').empty();
+                    $.each(d,function(key,value){
+                        brand += "<option value='"+value+"'>"+value+"</option>"
+                    })
+                    $('#col4_filter').append(brand);
+                    })
+
+                    this.api().columns([5]).every( function () {
+                    var column = this;
+                    var d = column.data().unique();
+                    var brand = "";
+                    brand = "<option></option>";
+                    $('#col5_filter').empty();
+                    $.each(d,function(key,value){
+                        brand += "<option value='"+value+"'>"+value+"</option>"
+                    })
+                    $('#col5_filter').append(brand);
+                    })
+
+                    this.api().columns([6]).every( function () {
+                    var column = this;
+                    var d = column.data().unique();
+                    var brand = "";
+                    brand = "<option></option>";
+                    $('#col6_filter').empty();
+                    $.each(d,function(key,value){
+                        brand += "<option value='"+value+"'>"+value+"</option>"
+                    })
+                    $('#col6_filter').append(brand);
+                    })
+
+                    this.api().columns([7]).every( function () {
+                    var column = this;
+                    var d = column.data().unique();
+                    var brand = "";
+                    brand = "<option></option>";
+                    $('#col7_filter').empty();
+                    $.each(d,function(key,value){
+                        brand += "<option value='"+value+"'>"+value+"</option>"
+                    })
+                    $('#col7_filter').append(brand);
+                    })
+
+                    this.api().columns([8]).every( function () {
+                    var column = this;
+                    var d = column.data().unique();
+                    var brand = "";
+                    brand = "<option></option>";
+                    $('#col8_filter').empty();
+                    $.each(d,function(key,value){
+                        brand += "<option value='"+value+"'>"+value+"</option>"
+                    })
+                    $('#col8_filter').append(brand);
+                    })
+
+                    this.api().columns([9]).every( function () {
+                    var column = this;
+                    var d = column.data().unique();
+                    var brand = "";
+                    brand = "<option></option>";
+                    $('#col9_filter').empty();
+                    $.each(d,function(key,value){
+                        brand += "<option value='"+value+"'>"+value+"</option>"
+                    })
+                    $('#col9_filter').append(brand);
+                    })
+
                     $("a.delete").click(function () {
                         var id = $(this).attr('data-id');
                         swal({
@@ -340,122 +416,32 @@
             $("#col4_filter").select2({
                 placeholder: "Unit",
                 theme: "bootstrap",
-                allowClear: true,
-                ajax: {
-                    url: '{{ route('product.getSelect2Unit') }}',
-                    dataType: "json",
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function(item){
-                                return {
-                                    text: item.text,
-                                    id: item.text
-                                }
-                            })
-                        };
-                    },
-                    cache: true,
-                }
+                allowClear: true
             });
             $("#col5_filter").select2({
                 placeholder: "Type",
                 theme: "bootstrap",
-                allowClear: true,
-                ajax: {
-                    url: '{{ route('product.getSelect2Type') }}',
-                    dataType: "json",
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function(item){
-                                return {
-                                    text: item.text,
-                                    id: item.text
-                                }
-                            })
-                        };
-                    },
-                    cache: true,
-                }
+                allowClear: true
             });
             $("#col6_filter").select2({
                 placeholder: "Category",
                 theme: "bootstrap",
-                allowClear: true,
-                ajax: {
-                    url: '{{ route('product.getSelect2Category') }}',
-                    dataType: "json",
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function(item){
-                                return {
-                                    text: item.text,
-                                    id: item.text
-                                }
-                            })
-                        };
-                    },
-                    cache: true,
-                }
+                allowClear: true
             });
             $("#col7_filter").select2({
                 placeholder: "Sub Category",
                 theme: "bootstrap",
-                allowClear: true,
-                ajax: {
-                    url: '{{ route('product.getSelect2SubCat') }}',
-                    dataType: "json",
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function(item){
-                                return {
-                                    text: item.text,
-                                    id: item.text
-                                }
-                            })
-                        };
-                    },
-                    cache: true,
-                }
+                allowClear: true
             });
             $("#col8_filter").select2({
                 placeholder: "Brand",
                 theme: "bootstrap",
                 allowClear: true,
-                ajax: {
-                    url: '{{ route('product.getSelect2Brand') }}',
-                    dataType: "json",
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function(item){
-                                return {
-                                    text: item.text,
-                                    id: item.text
-                                }
-                            })
-                        };
-                    },
-                    cache: true,
-                }
             });
             $("#col9_filter").select2({
                 placeholder: "Group",
                 theme: "bootstrap",
-                allowClear: true,
-                ajax: {
-                    url: '{{ route('product.getSelect2Group') }}',
-                    dataType: "json",
-                    processResults: function (data) {
-                        return {
-                            results: $.map(data, function(item){
-                                return {
-                                    text: item.text,
-                                    id: item.text
-                                }
-                            })
-                        };
-                    },
-                    cache: true,
-                }
+                allowClear: true
             });
 
             $('#table-product').on('dblclick','tr',function () {
