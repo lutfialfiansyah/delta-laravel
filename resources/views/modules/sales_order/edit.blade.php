@@ -220,20 +220,21 @@
                                               <span id='lproduct_{{$a}}'>{{$row->name}}</span>
                                             </td>
                                             <td>
-                                              <input type='hidden' id='qty_{{$a}}' name='qty[]' value=''><span id='lqty_{{$a}}'>{{$row->unit_qty}}</span>
+                                              <input type='hidden' id='qty_{{$a}}' name='qty[]' value='{{$row->qty}}'>
+                                              <input type='hidden' id='qty_{{$a}}' name='unit_qty[]' value='{{$row->unit_qty}}'><span id='lqty_{{$a}}'>{{$row->unit_qty}}</span>
                                             </td>
                                             <td>
                                                 <input type='hidden' id='list_disc_{{$a}}' name='list_disc[]' value=','>
-                                                <input type='hidden' id='unit_{{$a}}' name='unit[]' value=''>
+                                                <input type='hidden' id='unit_{{$a}}' name='unit[]' value='{{$row->unit_id}}'>
                                                 <span id='lunit_{{$a}}'>{{$row->unitname}}</span>
                                             </td>
                                             <td>
                                                 <span id='lqtybasic_{{$a}}'>{{$row->qty}}</span>
                                             </td>
                                             <td>
-                                              <input type='hidden' id='list_disc_reg_{{$a}}' name='list_disc_reg[]' value='"+data[i].disc1+","+data[i].disc2+",'>
-                                              <input type='hidden' id='list_disc_pro2_"+count+"' name='list_disc_pro2[]' value='"+data[i].promo_disc2+",'>
-                                              <input type='hidden' id='list_disc_pro_"+count+"' name='list_disc_pro[]' value='"+data[i].promo_disc1+",'>
+                                              <input type='hidden' id='list_disc_reg_{{$a}}' name='list_disc_reg[]' value='{{$row->disc1}},{{$row->disc2}},'>
+                                              <input type='hidden' id='list_disc_pro2_{{$a}}' name='list_disc_pro2[]' value='{{$row->promo_disc2}},'>
+                                              <input type='hidden' id='list_disc_pro_{{$a}}' name='list_disc_pro[]' value='{{$row->promo_disc1}},'>
                                               <input type='hidden' id='price_"+count+"' name='price[]' value=''>
                                               <span id='lprice_{{$a}}'>{{number_format($row->price*$row->qty,2)}}</span>
                                             </td>

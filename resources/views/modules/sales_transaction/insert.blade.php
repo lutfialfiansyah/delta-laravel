@@ -1203,7 +1203,7 @@
                 item_no.innerHTML = "<span id='litemno_"+count+"'>"+$("#item_no").val()+"</span>"
                 product_code.innerHTML = "<span id='lproduct_code_"+count+"'>"+$("#productids").val()+"</span>"
                 productName.innerHTML = "<input type='hidden' id='product_"+count+"' name='productid[]' value='"+$("#product_id").val()+"'><span id='lproduct_"+count+"'>"+$("#product_name").val()+"</span>"
-                qty.innerHTML = "<input type='hidden' id='qty_"+count+"' name='qty[]' value='"+$("#qty").val()+"'><span id='lqty_"+count+"'>"+$("#qty").val()+"</span>"
+                qty.innerHTML = "<input type='hidden' id='qtykali_"+count+"' name='qtykali[]' value='"+$("#qtykali").val()+"'><input type='hidden' id='qty_"+count+"' name='qty[]' value='"+$("#qty").val()+"'><span id='lqty_"+count+"'>"+$("#qty").val()+"</span>"
                 unit.innerHTML = "<input type='hidden' id='list_disc_"+count+"' name='list_disc[]' value='"+$("#list_disc").val()+"'><input type='hidden' id='unit_"+count+"' name='unit[]' value='"+$("#unit_id").val()+"'><span id='lunit_"+count+"'>"+$("#unit").val()+"</span>"
                 price.innerHTML = "<input type='hidden' id='list_disc_reg_"+count+"' name='list_disc_reg[]' value='"+$("#list_disc_reg").val()+"'><input type='hidden' id='list_disc_pro_"+count+"' name='list_disc_pro2[]' value='"+$("#list_disc_pro2").val()+"'><input type='hidden' id='list_disc_pro_"+count+"' name='list_disc_pro[]' value='"+$("#list_disc_pro").val()+"'><input type='hidden' id='price_"+count+"' name='price[]' value='"+$("#price").val()+"'><span id='lprice_"+count+"'>"+accounting.formatMoney($("#totalprice").val(),'',2)+"</span>"
                 discount.innerHTML = "<input type='hidden' id='totdiscreg_"+count+"' name='totdisc_reg[]' value='"+$("#totdiscreg").val()+"'><input type='hidden' id='discount_"+count+"' name='discount[]' value='"+$("#totdiscount").val()+"'><span id='ltotdiscount_"+count+"'>"+accounting.formatMoney($("#totdiscount").val(),'',2)+"</span>"
@@ -1281,23 +1281,25 @@
                        disc2 = (data[i].disc2/100)*price_total;
                        reguler_discount = disc1+disc2;
                        price_total -= disc2;
+                       promo_disc=0;
+                       if(data[i].price_disc!=null){
                        var price_disc = data[i].price_disc.split(',');
                        var promo_disc1 = data[i].promo_disc1.split(',');
                        var promo_disc2 = data[i].promo_disc2.split(',');
-                       promo_disc=0;
                        $.each(price_disc,function(key,value){
                          promo_disc += price_total*(promo_disc1[key]/100);
                           price_total -= price_total*(promo_disc1[key]/100);
                           promo_disc += price_total*(promo_disc2[key]/100);
                           price_total -= price_total*(promo_disc2[key]/100);
                        })
+                       }
                        total_discount = reguler_discount+promo_disc;
                        valuetable = valuetable+"<tr>" +
                             "<td>"+ parseInt(n)+"</td>"+
                             "<td><span id='litemno_"+n+"'>"+ data[i].item_no+"</span></td>"+
                             "<td><span id='lproduct_code_"+n+"'>"+ data[i].code+"</span>"+
-                            "<td><input type='hidden' id='product_"+count+"' name='productid[]' value='"+data[i].id+"'><span id='lproduct_"+count+"'>"+data[i].name+"</span></td>"+
-                            "<td><input type='hidden' id='qty_"+count+"' name='qty[]' value='"+data[i].qty+"'><span id='lqty_"+count+"'>"+data[i].unit_qty+"</span></td>"+
+                            "<td><input type='hidden' id='product_"+count+"' name='productid[]' value='"+data[i].product_id+"'><span id='lproduct_"+count+"'>"+data[i].name+"</span></td>"+
+                            "<td><input type='hidden' id='qtykali_"+count+"' name='qtykali[]' value='"+data[i].qtykali+"'><input type='hidden' id='qty_"+count+"' name='qty[]' value='"+data[i].unit_qty+"'><span id='lqty_"+count+"'>"+data[i].unit_qty+"</span></td>"+
                             "<td><input type='hidden' id='list_disc_"+count+"' name='list_disc[]' value='"+data[i].price_disc+",'><input type='hidden' id='unit_"+count+"' name='unit[]' value='"+data[i].unit_id+"'><span id='lunit_"+count+"'>"+data[i].unitname+"</span></td>"+
                             "<td><span id='lconversion_"+count+"'>"+data[i].unit_qty*data[i].conversion_qty+"</span></td>"+
                             "<td><input type='hidden' id='list_disc_reg_"+count+"' name='list_disc_reg[]' value='"+data[i].disc1+","+data[i].disc2+",'><input type='hidden' id='list_disc_pro2_"+count+"' name='list_disc_pro2[]' value='"+data[i].promo_disc2+",'><input type='hidden' id='list_disc_pro_"+count+"' name='list_disc_pro[]' value='"+data[i].promo_disc1+",'><input type='hidden' id='price_"+count+"' name='price[]' value='"+parseInt(data[i].price)+"'><span id='lprice_"+count+"'>"+accounting.formatMoney(price,'',2)+"</span></td>"+

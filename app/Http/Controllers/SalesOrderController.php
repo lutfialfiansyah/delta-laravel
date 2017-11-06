@@ -158,8 +158,8 @@ class SalesOrderController extends Controller
             })
             ->leftjoin('vw_pivot_sales_order as e','a.id','=','e.sales_order_detail_id')
             ->select('a.*','b.name','b.code','item_no','c.name as unitname','d.qty as qtykali','e.*',
-                      DB::raw('case when a.qty > summarystock then summarystock else a.qty end as qty'),
-                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.qty end as unit_qty')
+                      DB::raw('case when a.qty and d.qty=1 > summarystock then summarystock else a.qty end as qty'),
+                      DB::raw('case when a.qty > summarystock and d.qty <>1 then cast(summarystock/d.qty as decimal(3,0)) else a.qty end as unit_qty')
              )
             ->where('a.sales_order_id','=',$id)
             ->get();
@@ -184,8 +184,8 @@ class SalesOrderController extends Controller
             })
             ->leftjoin('vw_pivot_sales_order as e','a.id','=','e.sales_order_detail_id')
             ->select('a.*','b.name','b.code','item_no','c.name as unitname','d.qty as qtykali','e.*',
-                      DB::raw('case when a.qty > summarystock then summarystock else a.qty end as qty'),
-                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.qty end as unit_qty')
+                      DB::raw('case when a.qty >  summarystock then summarystock else a.qty end as qty'),
+                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.unit_qty end as unit_qty')
              )
             ->where('a.sales_order_id','=',$id)
             ->get();
@@ -207,7 +207,7 @@ class SalesOrderController extends Controller
             ->leftjoin('vw_pivot_sales_order as e','a.id','=','e.sales_order_detail_id')
             ->select('a.*','b.name','b.code','item_no','c.name as unitname','d.qty as qtykali','e.*',
                       DB::raw('case when a.qty > summarystock then summarystock else a.qty end as qty'),
-                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.qty end as unit_qty')
+                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.unit_qty end as unit_qty')
              )
             ->where('a.sales_order_id','=',$id)
             ->get();

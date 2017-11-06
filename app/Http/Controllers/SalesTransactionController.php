@@ -125,19 +125,24 @@ class SalesTransactionController extends Controller
               unset($list_disc_pro2[count($list_disc_pro2)-1]);
               unset($list_disc_pro[count($list_disc_pro)-1]);
                 $productId = $request->input('productid')[$i];
-                $qty = $request->input('qty')[$i];
+                $unit_qty = $request->input('qty')[$i];
+                $qtykali = $request->input('qtykali')[$i];
                 $price = $request->input('price')[$i];
                 $discount = $request->input('discount')[$i];
                 $unit = $request->input('unit')[$i];
                 $totalprice = $request->input('total')[$i];
-                $totalhpp = $totalhpp + ( $qty *$price);
+                $totalhpp = $totalhpp + ( ($qtykali*$unit_qty) *$price);
                 $idSt = DB::table('sales_transaction_detail')->insertGetId(
                     ['sales_transaction_id' => $id,
                         'unit_id'=>$unit,'product_id' => $productId,
                         'price'=>$price,
-                        'price_total'=>$totalprice,'qty' => $qty,'discount_total' => $discount,
+                        'price_total'=>$totalprice,
+                        'qty' => $qtykali*$unit_qty,
+                        'unit_qty' => $unit_qty,
+                        'discount_total' => $discount,
                         'created_at'=> Carbon::now(),
                         'updated_at'=> Carbon::now(),
+                        'conversion_qty'=>$qtykali,
                         'tax_id'=>$request->input('taxid')[$i],
                         'disc1'=>$list_disc_reg[0],
                         'disc2'=>$list_disc_reg[1],
