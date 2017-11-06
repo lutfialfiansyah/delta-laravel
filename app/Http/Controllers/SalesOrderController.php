@@ -148,10 +148,23 @@ class SalesOrderController extends Controller
         $salesOrder=SalesOrder::find($id);
         $detail = DB::table('sales_order_detail as a')
             ->join('product as b','b.id','=','a.product_id')
-            ->join('unit as c','c.id','=','a.unit_id')
-            ->where('sales_order_id','=',$id)
-            ->select('a.*','b.code','b.name','a.id as idpod','c.name as unitname')
+            ->join('unit  as c','c.id','=','a.unit_id')
+            ->join('vwunitcon as d',function($q){
+              $q->on('a.unit_id','=','d.unit_id')->on('a.product_id','d.product_id');
+            })
+            ->join('sales_order  as g','g.id','=','a.sales_order_id')
+            ->join('vw_summary_stock2 as f',function($q){
+              $q->on('g.branch_id','=','f.branch_id')->on('a.product_id','f.id');
+            })
+            ->leftjoin('vw_pivot_sales_order as e','a.id','=','e.sales_order_detail_id')
+            ->select('a.*','b.name','b.code','item_no','c.name as unitname','d.qty as qtykali','e.*',
+                      DB::raw('case when a.qty > summarystock then summarystock else a.qty end as qty'),
+                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.qty end as unit_qty')
+             )
+            ->where('a.sales_order_id','=',$id)
             ->get();
+        //echo json_encode($detail);
+        //exit;
         return view('modules.sales_order.detail',compact('salesOrder','detail'));
     }
     public function editSalesOrder($id){
@@ -161,11 +174,23 @@ class SalesOrderController extends Controller
         $salesOrder=SalesOrder::find($id);
         $detail = DB::table('sales_order_detail as a')
             ->join('product as b','b.id','=','a.product_id')
-            ->join('unit as c','c.id','=','a.unit_id')
-            ->where('sales_order_id','=',$id)
-            ->select('a.*','b.code','b.name','a.id as idpod','c.name as unitname')
+            ->join('unit  as c','c.id','=','a.unit_id')
+            ->join('vwunitcon as d',function($q){
+              $q->on('a.unit_id','=','d.unit_id')->on('a.product_id','d.product_id');
+            })
+            ->join('sales_order  as g','g.id','=','a.sales_order_id')
+            ->join('vw_summary_stock2 as f',function($q){
+              $q->on('g.branch_id','=','f.branch_id')->on('a.product_id','f.id');
+            })
+            ->leftjoin('vw_pivot_sales_order as e','a.id','=','e.sales_order_detail_id')
+            ->select('a.*','b.name','b.code','item_no','c.name as unitname','d.qty as qtykali','e.*',
+                      DB::raw('case when a.qty > summarystock then summarystock else a.qty end as qty'),
+                      DB::raw('case when a.qty > summarystock then cast(summarystock/d.qty as decimal(3,0)) else a.qty end as unit_qty')
+             )
+            ->where('a.sales_order_id','=',$id)
             ->get();
-
+          //json_encode($detail);
+          //exit;
         return view('modules.sales_order.edit',compact('products','salesOrder','detail','salesman','customer'));
     }
     public function getDetail($id){

@@ -18,4 +18,13 @@ class SalesOrder extends Model
     public function user(){
       return $this->belongsTo('App\User','updated_by','id');
     }
+    public function paymentTerm(){
+        return $this->belongsTo('App\PaymentTerm','payment_term_id','id');
+    }
+    public function delivery(){
+      return $this->belongsTo('App\Delivery','delivery_type_id','id');
+    }
+    public function currency(){
+      return $this->belongsTo('App\Currency','currency_id','id');
+    }
 }
