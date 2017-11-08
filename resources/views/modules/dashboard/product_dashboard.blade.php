@@ -41,7 +41,8 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <button id='triggerShow'>Filter</button>
+                    <button type="button" class="btn default" id='triggerShow' style="width: 121px;">Filter</button>
+
                     <div id='filterId' class="row">
                         <div class="col-md-12 ">
                             <input type="text" class="form-control global_filter" placeholder="Global Search" id="global_filter"><br>
@@ -238,8 +239,23 @@
             ).draw();
         }
         $(function() {
+            $('#col4_filter').change(function(){
+                 $(this).attr('isi',$(this).val());
+            })
+            $('#col5_filter').change(function(){
+                 $(this).attr('isi',$(this).val());
+            })
+            $('#col6_filter').change(function(){
+                 $(this).attr('isi',$(this).val());
+            })
+            $('#col7_filter').change(function(){
+                 $(this).attr('isi',$(this).val());
+            })
             $('#col8_filter').change(function(){
-                $(this).val();
+                 $(this).attr('isi',$(this).val());
+            })
+            $('#col9_filter').change(function(){
+                 $(this).attr('isi',$(this).val());
             })
             $('#filterId').hide();
             $('#triggerShow').click(function(){
@@ -267,8 +283,12 @@
                     var column = this;
                     var d = column.data().unique();
                     var brand = "";
-                    brand = "<option></option>";
                     $('#col4_filter').empty();
+                    if($('#col4_filter').attr('isi')!=undefined){
+                        brand = "<option>"+$('#col4_filter').attr('isi')+"</option>";
+                    }else{
+                        brand = "<option></option>";
+                    }
                     $.each(d,function(key,value){
                         brand += "<option value='"+value+"'>"+value+"</option>"
                     })
@@ -279,8 +299,12 @@
                     var column = this;
                     var d = column.data().unique();
                     var brand = "";
-                    brand = "<option></option>";
                     $('#col5_filter').empty();
+                    if($('#col5_filter').attr('isi')!=undefined){
+                        brand = "<option>"+$('#col5_filter').attr('isi')+"</option>";
+                    }else{
+                        brand = "<option></option>";
+                    }
                     $.each(d,function(key,value){
                         brand += "<option value='"+value+"'>"+value+"</option>"
                     })
@@ -291,8 +315,12 @@
                     var column = this;
                     var d = column.data().unique();
                     var brand = "";
-                    brand = "<option></option>";
                     $('#col6_filter').empty();
+                    if($('#col6_filter').attr('isi')!=undefined){
+                        brand = "<option>"+$('#col6_filter').attr('isi')+"</option>";
+                    }else{
+                        brand = "<option></option>";
+                    }
                     $.each(d,function(key,value){
                         brand += "<option value='"+value+"'>"+value+"</option>"
                     })
@@ -303,8 +331,12 @@
                     var column = this;
                     var d = column.data().unique();
                     var brand = "";
-                    brand = "<option></option>";
                     $('#col7_filter').empty();
+                    if($('#col7_filter').attr('isi')!=undefined){
+                        brand = "<option>"+$('#col7_filter').attr('isi')+"</option>";
+                    }else{
+                        brand = "<option></option>";
+                    }
                     $.each(d,function(key,value){
                         brand += "<option value='"+value+"'>"+value+"</option>"
                     })
@@ -315,8 +347,12 @@
                     var column = this;
                     var d = column.data().unique();
                     var brand = "";
-                    brand = "<option></option>";
                     $('#col8_filter').empty();
+                    if($('#col8_filter').attr('isi')!=undefined){
+                        brand = "<option>"+$('#col8_filter').attr('isi')+"</option>";
+                    }else{
+                        brand = "<option></option>";
+                    }
                     $.each(d,function(key,value){
                         brand += "<option value='"+value+"'>"+value+"</option>"
                     })
@@ -327,8 +363,12 @@
                     var column = this;
                     var d = column.data().unique();
                     var brand = "";
-                    brand = "<option></option>";
                     $('#col9_filter').empty();
+                    if($('#col9_filter').attr('isi')!=undefined){
+                        brand = "<option>"+$('#col9_filter').attr('isi')+"</option>";
+                    }else{
+                        brand = "<option></option>";
+                    }
                     $.each(d,function(key,value){
                         brand += "<option value='"+value+"'>"+value+"</option>"
                     })

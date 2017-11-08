@@ -60,7 +60,7 @@
                                                 <label class="control-label col-sm-4">Item No.</label>
                                                 <div class="col-md-6">
                                                     <div class="input-group" style="width: 100%;">
-                                                        <input type="text" name="item_no" readonly value="{{$itemno}}" class="form-control">
+                                                        <input type="text" id="itemno" name="item_no" readonly value="{{$itemno}}" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -513,8 +513,7 @@
                     });
                 }
             });
-            
-
+        
 
             $("#tunit3").attr('disabled', 'disabled');
             $("#unit3qty").attr('disabled', 'disabled');
@@ -612,6 +611,25 @@
                     minLength: 0,
                     open: function () {
                         $(this).data("uiAutocomplete").menu.element.addClass("");
+                    },
+                    select: function(event, ui) {
+                        var id = ui.item.id;
+                        // $("#tbrand").val( ui.item.name );
+                        //var code = $("#itemno").val().substr(2,7);
+                        var code="";
+                        var prefix = $("#itemno").val().substr(0,2);
+                        if(id<10){
+                            code = "00000"+id;
+                        }else if(id<100){
+                            code = "0000"+id;
+                        }
+                        $.get("{{ url('api/product/getItemNO/') }}/"+id,function(itemno){
+                            $("#itemno").val(prefix+code+itemno);    
+                        })
+                        
+                    },
+                    change: function(event,ui){
+                        
                     }
                 }
             ).focus(function(){

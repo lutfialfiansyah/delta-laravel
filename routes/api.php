@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Helpers\MegaTrend;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -875,3 +875,6 @@ Route::post('users/addData', [
     'uses' => 'UsersController@addData',
     'as' => 'users.addData'
 ]);
+Route::get('product/getItemNO/{id}',function($id){
+    echo $code = MegaTrend::getLastCodeProduct($id);
+});

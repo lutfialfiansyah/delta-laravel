@@ -28,7 +28,27 @@ class MegaTrend{
         }
         return $code;
     }
-
+    public static function getLastCodeProduct($brand_id){
+        $code =(array)DB::select("select max(right(item_no,4)) lastcode from product where brand_id = '".$brand_id."'");
+        if(empty($code[0]->lastcode)){
+            $code="0001";
+        }else{
+             $lastcode = ($code[0]->lastcode)+1;
+            if($lastcode<10){
+                $lastcode="000".$lastcode;
+            }else if($lastcode<100){
+                $lastcode="00".$lastcode;
+            }
+            else if($lastcode<1000){
+                $lastcode="0".$lastcode;
+            }
+            else if($lastcode<10000){
+                $lastcode=$lastcode;
+            }
+            $code = $lastcode;
+        }
+        return $code;   
+    }
     public static function getProductItem($prefix,$table,$field){
         $code =(array)DB::select("select max(right(".$field.",5)) lastcode from ".$table);
         //$codes= $code[0]->lastcode);

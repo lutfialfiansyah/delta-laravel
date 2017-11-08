@@ -513,7 +513,7 @@ public function addData(Request $request)
             'coa_list_id'=>$stock,
             'updated_by'=>$users
 
-        ]);
+        ])->nullable();
         $sales_transaction = $request['sales_transaction_id'];
         $module_index_id = '2';
         $users = Auth::user()->id;
@@ -523,7 +523,7 @@ public function addData(Request $request)
             'module_index_id'=>$module_index_id,
             'coa_list_id'=>$sales_transaction,
             'updated_by'=>$users
-            ]);
+            ])->nullable();
         $sales_return = $request['sales_return_id'];
         $module_index_id = '3';
         $users = Auth::user()->id;
@@ -533,7 +533,7 @@ public function addData(Request $request)
             'module_index_id'=>$module_index_id,
             'coa_list_id'=>$sales_return,
             'updated_by'=>$users
-        ]);
+        ])->nullable();
         $purchase_return = $request['purchase_return_id'];
         $module_index_id = '4';
         $users = Auth::user()->id;
@@ -543,7 +543,7 @@ public function addData(Request $request)
             'module_index_id'=>$module_index_id,
             'coa_list_id'=>$purchase_return,
             'updated_by'=>$users
-        ]);
+        ])->nullable();
         $weight = $request['weight'];
         $width = $request['width'];
         $length = $request['length'];
