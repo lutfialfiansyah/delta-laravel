@@ -19,6 +19,6 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "jsreport": "^1.8.2"
+    "jsreport": "^2.6.0"
   }
 }
